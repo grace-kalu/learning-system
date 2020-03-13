@@ -104,4 +104,12 @@ public class User extends DateAudit {
     public void setEmailVerificationStatus(EmailVerificationStatus emailVerificationStatus) {
         this.emailVerificationStatus = emailVerificationStatus;
     }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 }
