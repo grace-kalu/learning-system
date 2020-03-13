@@ -1,7 +1,7 @@
 package com.codeWithMerald.RoyalSealLearningSystem.security;
 
 
-import com.codeWithMerald.RoyalSealLearningSystem.exception.CustomException;
+import com.codeWithMerald.RoyalSealLearningSystem.exception.AppException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +51,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 );
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             } else {
-                throw new CustomException("This token is either expired or does not belong to you", HttpStatus.BAD_REQUEST);
+                throw new AppException("This token is either expired or does not belong to you", HttpStatus.BAD_REQUEST);
             }
         }
         filterChain.doFilter(httpServletRequest, httpServletResponse);

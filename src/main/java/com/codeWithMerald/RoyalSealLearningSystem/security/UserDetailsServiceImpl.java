@@ -1,5 +1,6 @@
 package com.codeWithMerald.RoyalSealLearningSystem.security;
 
+import com.codeWithMerald.RoyalSealLearningSystem.exception.AppException;
 import com.codeWithMerald.RoyalSealLearningSystem.exception.CustomException;
 import com.codeWithMerald.RoyalSealLearningSystem.models.user.User;
 import com.codeWithMerald.RoyalSealLearningSystem.repositories.UserRepository;
@@ -25,7 +26,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         User user = userRepository.findByEmail(email);
 
         if (user == null) {
-            throw new CustomException("Email not found", HttpStatus.UNPROCESSABLE_ENTITY);
+            throw new AppException("Email not found", HttpStatus.UNPROCESSABLE_ENTITY);
         }
 
         return org.springframework.security.core.userdetails.User.withUsername(email)
