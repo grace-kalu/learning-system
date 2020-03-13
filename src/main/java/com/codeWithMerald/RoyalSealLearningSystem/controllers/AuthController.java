@@ -2,6 +2,10 @@ package com.codeWithMerald.RoyalSealLearningSystem.controllers;
 
 import com.codeWithMerald.RoyalSealLearningSystem.models.user.Role;
 import com.codeWithMerald.RoyalSealLearningSystem.models.user.User;
+import com.codeWithMerald.RoyalSealLearningSystem.payload.auth.LoginRequest;
+import com.codeWithMerald.RoyalSealLearningSystem.payload.auth.NewPasswordRequest;
+import com.codeWithMerald.RoyalSealLearningSystem.payload.auth.PasswordResetRequest;
+import com.codeWithMerald.RoyalSealLearningSystem.payload.auth.SignUpRequest;
 import com.codeWithMerald.RoyalSealLearningSystem.responses.Response;
 import com.codeWithMerald.RoyalSealLearningSystem.services.auth.AuthService;
 import org.modelmapper.ModelMapper;
@@ -38,7 +42,7 @@ public class AuthController {
     public ResponseEntity<Response<String>> verifyUser(@PathVariable String token) {
         authService.verifyUser(token);
         Response<String> response = new Response<>(HttpStatus.ACCEPTED);
-        response.setMessage("You are now a verified user of Banka");
+        response.setMessage("You are now a verified user of Royalseal");
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
