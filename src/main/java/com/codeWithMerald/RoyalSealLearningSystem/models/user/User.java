@@ -33,6 +33,8 @@ public class User extends DateAudit {
     @Email
     private String email;
 
+    private String phoneNumber;
+
     @JsonIgnoreProperties
     @Size(min = 6)
     private String password;

@@ -1,7 +1,6 @@
 package com.codeWithMerald.RoyalSealLearningSystem.security;
 
 import com.codeWithMerald.RoyalSealLearningSystem.exception.AppException;
-import com.codeWithMerald.RoyalSealLearningSystem.exception.CustomException;
 import com.codeWithMerald.RoyalSealLearningSystem.models.user.User;
 import com.codeWithMerald.RoyalSealLearningSystem.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

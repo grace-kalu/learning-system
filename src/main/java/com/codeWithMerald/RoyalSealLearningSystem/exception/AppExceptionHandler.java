@@ -1,10 +1,16 @@
 package com.codeWithMerald.RoyalSealLearningSystem.exception;
 
 import com.codeWithMerald.RoyalSealLearningSystem.models.user.User;
-import com.sun.mail.iap.Response;
+import com.codeWithMerald.RoyalSealLearningSystem.responses.Response;
+import org.springframework.beans.TypeMismatchException;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.validation.ConstraintViolationException;
@@ -16,17 +22,17 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<Object> handleConstraintValidation(ConstraintViolationException exception) {
-        Response<User> response = new Response(HttpStatus.BAD_REQUEST);
+        Response<User> response = new Response<>(HttpStatus.BAD_REQUEST);
         response.addValidationErrors(exception.getConstraintViolations());
         response.setError("Validation Error");
         return buildResponseEntity(response);
     }
 
-    @ExceptionHandler(CustomException.class)
-    public ResponseEntity<Object> handleCustomException(CustomException customException) {
-        Response<User> response = new Response(customException.getStatus());
-        response.setError(customException.getMessage());
-        response.setStatus(customException.getStatus());
+    @ExceptionHandler(AppException.class)
+    public ResponseEntity<Object> handleCustomException(AppException appException) {
+        Response<User> response = new Response(appException.getStatus());
+        response.setError(appException.getMessage());
+        response.setStatus(appException.getStatus());
         return buildResponseEntity(response);
     }
 
