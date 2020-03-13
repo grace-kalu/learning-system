@@ -8,4 +8,5 @@ public enum Role {
     public String getAuthority() {
         return name();
     }
+
 }
