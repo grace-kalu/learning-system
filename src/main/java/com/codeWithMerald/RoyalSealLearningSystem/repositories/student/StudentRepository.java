@@ -1,4 +1,4 @@
-package com.codeWithMerald.RoyalSealLearningSystem.repositories;
+package com.codeWithMerald.RoyalSealLearningSystem.repositories.student;
 
 import com.codeWithMerald.RoyalSealLearningSystem.models.student.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
