@@ -1,6 +1,5 @@
 package com.codeWithMerald.RoyalSealLearningSystem.models.student;
 
-import com.codeWithMerald.RoyalSealLearningSystem.models.DateAudit;
 import com.codeWithMerald.RoyalSealLearningSystem.models.course.Course;
 import com.codeWithMerald.RoyalSealLearningSystem.models.department.Department;
 import com.codeWithMerald.RoyalSealLearningSystem.models.user.User;
