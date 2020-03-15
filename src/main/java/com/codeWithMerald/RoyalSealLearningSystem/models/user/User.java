@@ -17,15 +17,18 @@ import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
-@Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Table(name = "users")
 public class User extends DateAudit {
     @NonNull
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    private String fullName;
 
     @NotBlank
     private String username;
@@ -56,6 +59,15 @@ public class User extends DateAudit {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
 
     public String getUsername() {
         return username;
