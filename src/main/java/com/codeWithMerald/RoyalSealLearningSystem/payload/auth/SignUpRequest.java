@@ -35,4 +35,5 @@ public class SignUpRequest {
     @NotBlank
     @NotNull
     private String phoneNumber;
+
 }

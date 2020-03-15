@@ -17,9 +17,10 @@ import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
-@Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Table(name = "users")
 public class User extends DateAudit {
     @NonNull
 

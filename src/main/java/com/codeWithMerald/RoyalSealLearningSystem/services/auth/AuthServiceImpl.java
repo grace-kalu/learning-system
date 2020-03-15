@@ -118,7 +118,7 @@ public class AuthServiceImpl implements AuthService {
         }
         String email = jwtTokenProvider.getEmail(token);
         if (!userRepository.existsByEmail(email)) {
-            throw new AppException("There is a compromise", HttpStatus.BAD_REQUEST);
+            throw new AppException("There has been a compromise", HttpStatus.BAD_REQUEST);
         }
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent()) {
