@@ -21,7 +21,6 @@ import java.util.Set;
         property = "courseId")
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
