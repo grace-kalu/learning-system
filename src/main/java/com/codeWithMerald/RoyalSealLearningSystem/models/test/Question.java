@@ -1,6 +1,7 @@
 package com.codeWithMerald.RoyalSealLearningSystem.models.test;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "question")
 @Data
+@AllArgsConstructor
 public class Question {
 
     @Id
