@@ -20,7 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "users")
+@Table(name = "user")
 public class User extends DateAudit {
     @NonNull
 
