@@ -31,6 +31,7 @@ public class Course {
     private String title;
 
     @ManyToMany
+    @JsonIgnore
     @JoinTable(name = "student_course",
             joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "courseId"),
             inverseJoinColumns = @JoinColumn(name = "student_id", referencedColumnName = "studentId"))
@@ -38,9 +39,11 @@ public class Course {
 
     @ManyToOne
     @JoinColumn(name = "department_id")
+    @JsonIgnore
     private Department department;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<Assignment> assignments;
 
     @JsonIgnore
