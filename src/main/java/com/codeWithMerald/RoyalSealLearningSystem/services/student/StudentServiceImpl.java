@@ -7,6 +7,8 @@ import com.codeWithMerald.RoyalSealLearningSystem.repositories.StudentRepository
 import com.codeWithMerald.RoyalSealLearningSystem.repositories.course.CourseRepository;
 import com.codeWithMerald.RoyalSealLearningSystem.repositories.student.StudentAssignmentRepository;
 import com.codeWithMerald.RoyalSealLearningSystem.repositories.test.QuizScoreRepository;
+import com.codeWithMerald.RoyalSealLearningSystem.responses.ApiResponse;
+import com.codeWithMerald.RoyalSealLearningSystem.responses.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,14 +46,22 @@ public class StudentServiceImpl implements StudentService{
 
     }
 
-
     @Override
-    public Student updateStudent(Long studentId, StudentRequest student) {
+    public Student updateStudent(Long studentId, StudentRequest newStudent) {
+        Student student = studentRepository.findById(studentId).orElse(null);
+        if(student != null) {
+            student.setFullName(newStudent.getFullName());
+            student.setEmail(newStudent.getEmail());
+            student.setProfileImageUrl(newStudent.getProfileImageUrl());
+            student.setPhoneNumber(newStudent.getPhoneNumber());
+            return studentRepository.save(student);
+        }
         return null;
     }
 
     @Override
     public void deleteStudent(Long studentId) {
+        studentRepository.findById(studentId).ifPresent(studentRepository::delete);
 
     }
 }
