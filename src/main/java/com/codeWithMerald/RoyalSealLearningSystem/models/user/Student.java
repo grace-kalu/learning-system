@@ -6,6 +6,7 @@ import com.codeWithMerald.RoyalSealLearningSystem.models.department.Department;
 import com.codeWithMerald.RoyalSealLearningSystem.models.student.StudentAssignment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,7 +31,7 @@ public class Student extends DateAudit {
     @NonNull
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long studentId;
 
     private String fullName;
@@ -42,11 +43,12 @@ public class Student extends DateAudit {
 
     private String phoneNumber;
 
-    @JsonIgnoreProperties
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Size(min = 6)
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
+    @JsonIgnore
     @Fetch(value = FetchMode.SUBSELECT)
     List<Role> roles;
 
@@ -57,13 +59,16 @@ public class Student extends DateAudit {
     private EmailVerificationStatus emailVerificationStatus = EmailVerificationStatus.UNVERIFIED;
 
     @ManyToMany(mappedBy = "students")
+    @JsonIgnore
     private Set<Course> courses;
 
     @OneToMany(mappedBy = "assignment")
+    @JsonIgnore
     private Set<StudentAssignment> studentAssignment = new HashSet<StudentAssignment>();
 
     @ManyToOne
     @JoinColumn(name = "department_id")
+    @JsonIgnore
     private Department department;
 
     public Long getId() {

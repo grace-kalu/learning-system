@@ -7,6 +7,7 @@ import com.codeWithMerald.RoyalSealLearningSystem.services.student.StudentServic
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -23,6 +24,7 @@ public class StudentController {
     }
 
     @GetMapping()
+    @PreAuthorize("hasRole('STUDENT')")
     public ResponseEntity<List<Student>> getAllStudents() {
         List<Student> response = studentService.getAllStudents();
 
@@ -30,6 +32,7 @@ public class StudentController {
     }
 
     @GetMapping(path = "/{studentId}")
+    @PreAuthorize("hasRole('STUDENT')")
     public ResponseEntity<Student> getStudent(@PathVariable(value = "studentId") Long studentId) {
         Student response = studentService.getStudent(studentId);
 
@@ -37,6 +40,7 @@ public class StudentController {
     }
 
     @PutMapping("/{studentId}")
+    @PreAuthorize("hasRole('STUDENT')")
     public ResponseEntity<Student> updateStudent(@PathVariable(value = "studentId") Long studentId,
                                            @Valid @RequestBody StudentRequest newStudent) {
         Student updatedStudent = studentService.updateStudent(studentId, newStudent);
@@ -45,6 +49,7 @@ public class StudentController {
     }
 
     @DeleteMapping("/{studentId}")
+    @PreAuthorize("hasRole('STUDENT')")
     public ResponseEntity<ApiResponse> deleteStudent(@PathVariable(value = "studentId") Long studentId) {
         ApiResponse response = studentService.deleteStudent(studentId);
 
