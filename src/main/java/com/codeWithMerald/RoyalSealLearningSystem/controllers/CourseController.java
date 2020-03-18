@@ -49,7 +49,7 @@ public class CourseController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping("/course/add")
+    @PostMapping("/add")
     @ResponseBody()
     public ResponseEntity<Course> createCourse (@Valid @RequestBody Course course){
 
@@ -58,7 +58,7 @@ public class CourseController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/course/{courseId}")
+    @DeleteMapping("/delete/{courseId}")
     @ResponseBody()
     public ResponseEntity<ApiResponse> deleteStudent(@PathVariable(value = "courseId") Long courseId) {
         ApiResponse response = courseService.deleteCourse(courseId);
@@ -98,7 +98,7 @@ public class CourseController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PatchMapping("/course/map")
+    @PatchMapping("/enroll")
     @ResponseBody()
     public ResponseEntity<Course>mapCoursesToDepartment(@Valid @RequestBody DepartmentEnrollment enrollment){
         Course response = courseService.mapCoursesToDepartment(enrollment.getDepartmentId(), enrollment.getCourseId());

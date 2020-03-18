@@ -58,7 +58,7 @@ public class StudentController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping("/courses")
+    @PostMapping("/enroll")
     @ResponseBody
     public ResponseEntity<ApiResponse> enrollStudent(@RequestBody Enrollment enrollment){
         ApiResponse apiResponse =  studentService.enrollStudent(enrollment);
@@ -66,7 +66,7 @@ public class StudentController {
         return new ResponseEntity<>(apiResponse, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{studentId}/courses/{courseId}")
+    @DeleteMapping("/{studentId}/unenroll/{courseId}")
     @ResponseBody
     public ResponseEntity<ApiResponse> unEnrollStudent(@PathVariable(value = "studentId") Long studentId,
                                                        @PathVariable(value = "courseId") Long courseId){
