@@ -1,7 +1,10 @@
 package com.codeWithMerald.RoyalSealLearningSystem.services.course;
 
 import com.codeWithMerald.RoyalSealLearningSystem.models.course.Course;
+import com.codeWithMerald.RoyalSealLearningSystem.models.department.Department;
+import com.codeWithMerald.RoyalSealLearningSystem.models.teacher.Teacher;
 import com.codeWithMerald.RoyalSealLearningSystem.models.test.Quiz;
+import com.codeWithMerald.RoyalSealLearningSystem.models.user.Student;
 import com.codeWithMerald.RoyalSealLearningSystem.payload.CourseDTO;
 import com.codeWithMerald.RoyalSealLearningSystem.repositories.course.CourseRepository;
 import com.codeWithMerald.RoyalSealLearningSystem.repositories.test.QuizRepository;
@@ -13,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class CourseServiceImpl implements CourseService {
+public class CourseServiceImpl implements CourseService, PeopleService {
     private final CourseRepository courseRepository;
     private final QuizRepository quizRepository;
 
@@ -62,5 +65,24 @@ public class CourseServiceImpl implements CourseService {
     public List<Quiz> getQuizForCourse(Long courseId) {
         Course course = courseRepository.findById(courseId).orElse(null);
         return quizRepository.findByCourse(course);
+    }
+
+    @Override
+    public List<Student> getStudentForCourse(Long courseId) {
+        Course course = courseRepository.findById(courseId).orElse(null);
+        assert course != null;
+        return courseRepository.getStudentForCourse(courseId);
+    }
+    @Override
+    public List<Teacher> getTeachersForCourse(Long courseId) {
+        Course course = courseRepository.findById(courseId).orElse(null);
+        assert course != null;
+        return courseRepository.getTeachersForCourse(courseId);
+    }
+    @Override
+    public List<Department> getDepartmentsForCourse(Long courseId) {
+        Course course = courseRepository.findById(courseId).orElse(null);
+        assert course != null;
+        return courseRepository.getDepartmentsForCourse(courseId);
     }
 }

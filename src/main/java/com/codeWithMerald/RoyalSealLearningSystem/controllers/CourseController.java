@@ -1,6 +1,8 @@
 package com.codeWithMerald.RoyalSealLearningSystem.controllers;
 
 import com.codeWithMerald.RoyalSealLearningSystem.models.course.Course;
+import com.codeWithMerald.RoyalSealLearningSystem.models.department.Department;
+import com.codeWithMerald.RoyalSealLearningSystem.models.teacher.Teacher;
 import com.codeWithMerald.RoyalSealLearningSystem.models.test.Quiz;
 import com.codeWithMerald.RoyalSealLearningSystem.models.user.Student;
 import com.codeWithMerald.RoyalSealLearningSystem.payload.CourseDTO;
@@ -71,4 +73,27 @@ public class CourseController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping("/{courseId}/students")
+    @ResponseBody()
+    public ResponseEntity<List<Student>> getCourseStudent(@PathVariable("courseId") Long courseId){
+        List<Student> response = courseService.getStudentForCourse(courseId);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/{courseId}/teachers")
+    @ResponseBody()
+    public ResponseEntity<List<Teacher>> getCourseTeachers(@PathVariable("courseId") Long courseId){
+        List<Teacher> response = courseService.getTeachersForCourse(courseId);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/{courseId}/departments")
+    @ResponseBody()
+    public ResponseEntity<List<Department>> getCourseDepartments(@PathVariable("courseId") Long courseId){
+        List<Department> response = courseService.getDepartmentsForCourse(courseId);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }
