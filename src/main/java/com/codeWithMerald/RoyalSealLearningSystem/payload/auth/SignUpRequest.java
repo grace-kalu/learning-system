@@ -17,10 +17,10 @@ public class SignUpRequest {
     @NotBlank
     @NotNull
     private String fullName;
-
-    @NotBlank
-    @NotNull
-    private String userName;
+//
+//    @NotBlank
+//    @NotNull
+//    private String userName;
 
     @NotBlank
     @NotNull

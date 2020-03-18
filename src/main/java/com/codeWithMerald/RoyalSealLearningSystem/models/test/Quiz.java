@@ -10,12 +10,12 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "test")
+@Table(name = "quiz")
 @Data
-public class Test {
+public class Quiz {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long testId;
+    private Long quizId;
 
     private String name;
     private Date date;
@@ -31,11 +31,11 @@ public class Test {
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
     private List<Question> questions;
 
-    public Test() {
+    public Quiz() {
         this.questions = new ArrayList<>();
     }
 
-    public Test(String name, Course course) {
+    public Quiz(String name, Course course) {
         this.questions = new ArrayList<>();
         this.name = name;
         this.course = course;

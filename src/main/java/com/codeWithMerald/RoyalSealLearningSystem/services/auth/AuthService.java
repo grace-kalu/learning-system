@@ -1,12 +1,12 @@
 package com.codeWithMerald.RoyalSealLearningSystem.services.auth;
 
 import com.codeWithMerald.RoyalSealLearningSystem.models.user.Role;
-import com.codeWithMerald.RoyalSealLearningSystem.models.user.User;
+import com.codeWithMerald.RoyalSealLearningSystem.models.user.Student;
 
 import javax.servlet.http.HttpServletResponse;
 
 public interface AuthService {
-        void createUser(User user);
+        void createStudent(Student student);
 
         void verifyUser(String token);
 
@@ -16,5 +16,5 @@ public interface AuthService {
 
         void setNewPassword(Long id, String newPassword, String token);
 
-        User changeUserRole(Long id, Role role);
+        Student changeUserRole(Long id, Role role);
 }

@@ -2,12 +2,12 @@ package com.codeWithMerald.RoyalSealLearningSystem.models.teacher;
 
 import com.codeWithMerald.RoyalSealLearningSystem.models.course.Course;
 import com.codeWithMerald.RoyalSealLearningSystem.models.department.Department;
-import com.codeWithMerald.RoyalSealLearningSystem.models.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.Set;
 
 @Entity
@@ -15,10 +15,16 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Teacher extends User {
+//@DiscriminatorValue("teacher")
+public class Teacher{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long teacherId;
+
+    private String name;
+
+    @Email
+    private String email;
 
     @ManyToOne
     @JoinColumn(name = "department_id")
@@ -33,6 +39,22 @@ public class Teacher extends User {
 
     public void setTeacherId(Long teacherId) {
         this.teacherId = teacherId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Department getDepartment() {

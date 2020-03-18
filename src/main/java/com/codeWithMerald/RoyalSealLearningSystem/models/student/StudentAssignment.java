@@ -1,6 +1,7 @@
 package com.codeWithMerald.RoyalSealLearningSystem.models.student;
 
 import com.codeWithMerald.RoyalSealLearningSystem.models.course.Assignment;
+import com.codeWithMerald.RoyalSealLearningSystem.models.user.Student;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,7 +1,7 @@
 package com.codeWithMerald.RoyalSealLearningSystem.controllers;
 
 import com.codeWithMerald.RoyalSealLearningSystem.models.user.Role;
-import com.codeWithMerald.RoyalSealLearningSystem.models.user.User;
+import com.codeWithMerald.RoyalSealLearningSystem.models.user.Student;
 import com.codeWithMerald.RoyalSealLearningSystem.payload.auth.LoginRequest;
 import com.codeWithMerald.RoyalSealLearningSystem.payload.auth.NewPasswordRequest;
 import com.codeWithMerald.RoyalSealLearningSystem.payload.auth.PasswordResetRequest;
@@ -32,7 +32,7 @@ public class AuthController {
 
     @PostMapping("signup")
     public ResponseEntity<Response<String>> createUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-        authService.createUser(modelMapper.map(signUpRequest, User.class));
+        authService.createStudent(modelMapper.map(signUpRequest, Student.class));
         Response<String> response = new Response<>(HttpStatus.CREATED);
         response.setMessage("You have successfully signed up with Royalseal");
         return new ResponseEntity<>(response, HttpStatus.CREATED);
@@ -75,11 +75,11 @@ public class AuthController {
     }
 
     @PatchMapping("user")
-    public ResponseEntity<Response<User>> changeUserRole(@RequestParam Long id, @RequestParam Role role) {
-        User user = authService.changeUserRole(id, role);
-        Response<User> response = new Response<>(HttpStatus.ACCEPTED);
+    public ResponseEntity<Response<Student>> changeUserRole(@RequestParam Long id, @RequestParam Role role) {
+        Student student = authService.changeUserRole(id, role);
+        Response<Student> response = new Response<>(HttpStatus.ACCEPTED);
         response.setMessage("User role successfully changed to " + role);
-        response.setData(user);
+        response.setData(student);
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 }

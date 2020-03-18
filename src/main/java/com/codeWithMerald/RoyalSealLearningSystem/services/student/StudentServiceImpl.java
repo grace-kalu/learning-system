@@ -1,15 +1,12 @@
 package com.codeWithMerald.RoyalSealLearningSystem.services.student;
 
 import com.codeWithMerald.RoyalSealLearningSystem.exception.AppException;
-import com.codeWithMerald.RoyalSealLearningSystem.models.student.Student;
-import com.codeWithMerald.RoyalSealLearningSystem.models.user.User;
+import com.codeWithMerald.RoyalSealLearningSystem.models.user.Student;
 import com.codeWithMerald.RoyalSealLearningSystem.payload.StudentRequest;
-import com.codeWithMerald.RoyalSealLearningSystem.payload.auth.SignUpRequest;
-import com.codeWithMerald.RoyalSealLearningSystem.repositories.UserRepository;
+import com.codeWithMerald.RoyalSealLearningSystem.repositories.StudentRepository;
 import com.codeWithMerald.RoyalSealLearningSystem.repositories.course.CourseRepository;
 import com.codeWithMerald.RoyalSealLearningSystem.repositories.student.StudentAssignmentRepository;
-import com.codeWithMerald.RoyalSealLearningSystem.repositories.student.StudentRepository;
-import com.codeWithMerald.RoyalSealLearningSystem.repositories.test.TestScoreRepository;
+import com.codeWithMerald.RoyalSealLearningSystem.repositories.test.QuizScoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,18 +19,16 @@ public class StudentServiceImpl implements StudentService{
 
     private final CourseRepository courseRepository;
 
-    private final TestScoreRepository testScoreRepository;
+    private final QuizScoreRepository quizScoreRepository;
 
     private final StudentAssignmentRepository studentAssignmentRepository;
 
-    private final UserRepository userRepository;
-
-    public StudentServiceImpl(StudentRepository studentRepository, CourseRepository courseRepository, TestScoreRepository testScoreRepository, StudentAssignmentRepository studentAssignmentRepository, UserRepository userRepository) {
+    @Autowired
+    public StudentServiceImpl(StudentRepository studentRepository, CourseRepository courseRepository, QuizScoreRepository quizScoreRepository, StudentAssignmentRepository studentAssignmentRepository) {
         this.studentRepository = studentRepository;
         this.courseRepository = courseRepository;
-        this.testScoreRepository = testScoreRepository;
+        this.quizScoreRepository = quizScoreRepository;
         this.studentAssignmentRepository = studentAssignmentRepository;
-        this.userRepository = userRepository;
     }
 
     @Override
@@ -49,12 +44,6 @@ public class StudentServiceImpl implements StudentService{
 
     }
 
-    @Override
-    public Student createStudent(SignUpRequest newStudent) {
-        Student student = new User();
-
-        return null;
-    }
 
     @Override
     public Student updateStudent(Long studentId, StudentRequest student) {

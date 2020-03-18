@@ -1,5 +1,6 @@
 package com.codeWithMerald.RoyalSealLearningSystem.models.test;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,7 +9,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "answered_questions")
 @Data
-@NoArgsConstructor
 public class AnsweredQuestion {
 
     @Id
@@ -20,6 +20,9 @@ public class AnsweredQuestion {
     private Question question;
 
     private String selectedAnswer;
+
+    public AnsweredQuestion() {
+    }
 
     public AnsweredQuestion(Question question, String selectedAnswer) {
         this.question = question;

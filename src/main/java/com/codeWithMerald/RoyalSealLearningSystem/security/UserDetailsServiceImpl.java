@@ -1,11 +1,10 @@
 package com.codeWithMerald.RoyalSealLearningSystem.security;
 
 import com.codeWithMerald.RoyalSealLearningSystem.exception.AppException;
-import com.codeWithMerald.RoyalSealLearningSystem.models.user.User;
-import com.codeWithMerald.RoyalSealLearningSystem.repositories.UserRepository;
+import com.codeWithMerald.RoyalSealLearningSystem.models.user.Student;
+import com.codeWithMerald.RoyalSealLearningSystem.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
@@ -13,23 +12,23 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private UserRepository userRepository;
+    private StudentRepository studentRepository;
 
     @Autowired
-    public UserDetailsServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserDetailsServiceImpl(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String email) {
-        User user = userRepository.findByEmail(email);
+        Student student = studentRepository.findByEmail(email);
 
-        if (user == null) {
+        if (student == null) {
             throw new AppException("Email not found", HttpStatus.UNPROCESSABLE_ENTITY);
         }
 
         return org.springframework.security.core.userdetails.User.withUsername(email)
-                .password(user.getPassword()).authorities(user.getRoles())
+                .password(student.getPassword()).authorities(student.getRoles())
                 .accountExpired(false).accountLocked(false)
                 .credentialsExpired(false).disabled(false).build();
     }
