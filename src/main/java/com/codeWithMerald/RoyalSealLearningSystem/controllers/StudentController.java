@@ -1,9 +1,11 @@
 package com.codeWithMerald.RoyalSealLearningSystem.controllers;
 
 import com.codeWithMerald.RoyalSealLearningSystem.models.user.Student;
+import com.codeWithMerald.RoyalSealLearningSystem.payload.Enrollment;
 import com.codeWithMerald.RoyalSealLearningSystem.payload.StudentRequest;
 import com.codeWithMerald.RoyalSealLearningSystem.responses.ApiResponse;
 import com.codeWithMerald.RoyalSealLearningSystem.services.student.StudentService;
+import com.codeWithMerald.RoyalSealLearningSystem.services.student.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +18,10 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/students")
 public class StudentController {
-    private final StudentService studentService;
+    private final StudentServiceImpl studentService;
 
     @Autowired
-    public StudentController(StudentService studentService) {
+    public StudentController(StudentServiceImpl studentService) {
         this.studentService = studentService;
     }
 
@@ -54,5 +56,22 @@ public class StudentController {
         ApiResponse response = studentService.deleteStudent(studentId);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/courses")
+    @ResponseBody
+    public ResponseEntity<ApiResponse> enrollStudent(@RequestBody Enrollment enrollment){
+        ApiResponse apiResponse =  studentService.enrollStudent(enrollment);
+
+        return new ResponseEntity<>(apiResponse, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{studentId}/courses/{courseId}")
+    @ResponseBody
+    public ResponseEntity<ApiResponse> unEnrollStudent(@PathVariable(value = "studentId") Long studentId,
+                                                       @PathVariable(value = "courseId") Long courseId){
+        ApiResponse apiResponse =  studentService.unEnroll(studentId, courseId);
+
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 }

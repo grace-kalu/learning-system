@@ -10,9 +10,7 @@ import com.codeWithMerald.RoyalSealLearningSystem.repositories.course.CourseRepo
 import com.codeWithMerald.RoyalSealLearningSystem.repositories.student.StudentAssignmentRepository;
 import com.codeWithMerald.RoyalSealLearningSystem.repositories.test.QuizScoreRepository;
 import com.codeWithMerald.RoyalSealLearningSystem.responses.ApiResponse;
-import com.codeWithMerald.RoyalSealLearningSystem.responses.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
