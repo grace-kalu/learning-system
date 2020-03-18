@@ -23,7 +23,7 @@ public class Question {
     @ManyToOne
     @JoinColumn(name = "quiz_id")
     @JsonIgnore
-    private Test test;
+    private Quiz quiz;
 
     @ElementCollection
     private List<String> answers;
@@ -50,12 +50,12 @@ public class Question {
         this.question = question;
     }
 
-    public Test getTest() {
-        return test;
+    public Quiz getQuiz() {
+        return quiz;
     }
 
-    public void setTest(Test test) {
-        this.test = test;
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
     }
 
     public List<String> getAnswers() {

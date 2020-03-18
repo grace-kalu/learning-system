@@ -1,8 +1,8 @@
 package com.codeWithMerald.RoyalSealLearningSystem.models.course;
 
 import com.codeWithMerald.RoyalSealLearningSystem.models.department.Department;
-import com.codeWithMerald.RoyalSealLearningSystem.models.student.Student;
 import com.codeWithMerald.RoyalSealLearningSystem.models.teacher.Teacher;
+import com.codeWithMerald.RoyalSealLearningSystem.models.user.Student;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;

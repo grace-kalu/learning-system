@@ -1,6 +1,6 @@
 package com.codeWithMerald.RoyalSealLearningSystem.models.test;
 
-import com.codeWithMerald.RoyalSealLearningSystem.models.student.Student;
+import com.codeWithMerald.RoyalSealLearningSystem.models.user.Student;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,11 +9,11 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "testscore")
+@Table(name = "quizscore")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TestScore {
+public class QuizScore {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long testScoreId;
@@ -21,8 +21,8 @@ public class TestScore {
     private Long marks;
 
     @OneToOne
-    @JoinColumn(name = "test_id")
-    private Test test;
+    @JoinColumn(name = "quiz_id")
+    private Quiz quiz;
 
     @OneToOne
     @JoinColumn(name = "student_id")
@@ -32,11 +32,11 @@ public class TestScore {
     @JoinColumn(name = "correctQuestions")
     private List<AnsweredQuestion> answeredQuestions;
 
-    public Long getTestScoreId() {
+    public Long getQuizScoreId() {
         return testScoreId;
     }
 
-    public void setTestScoreId(Long testScoreId) {
+    public void setQuizScoreId(Long testScoreId) {
         this.testScoreId = testScoreId;
     }
 
@@ -48,12 +48,12 @@ public class TestScore {
         this.marks = marks;
     }
 
-    public Test getTest() {
-        return test;
+    public Quiz getQuiz() {
+        return quiz;
     }
 
-    public void setTest(Test test) {
-        this.test = test;
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
     }
 
     public Student getStudent() {

@@ -1,6 +1,9 @@
 package com.codeWithMerald.RoyalSealLearningSystem.models.user;
 
 import com.codeWithMerald.RoyalSealLearningSystem.models.DateAudit;
+import com.codeWithMerald.RoyalSealLearningSystem.models.course.Course;
+import com.codeWithMerald.RoyalSealLearningSystem.models.department.Department;
+import com.codeWithMerald.RoyalSealLearningSystem.models.student.StudentAssignment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -14,24 +17,26 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "user")
-public class User extends DateAudit {
+@Table(name = "student")
+public class Student extends DateAudit {
     @NonNull
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long studentId;
 
     private String fullName;
 
-    @NotBlank
-    private String username;
+//    @NotBlank
+//    private String username;
 
     @Email
     private String email;
@@ -52,12 +57,22 @@ public class User extends DateAudit {
     @JsonIgnore
     private EmailVerificationStatus emailVerificationStatus = EmailVerificationStatus.UNVERIFIED;
 
+    @ManyToMany(mappedBy = "students")
+    private Set<Course> courses;
+
+    @OneToMany(mappedBy = "assignment")
+    private Set<StudentAssignment> studentAssignment = new HashSet<StudentAssignment>();
+
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
+
     public Long getId() {
-        return id;
+        return studentId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long studentId) {
+        this.studentId = studentId;
     }
 
     public String getFullName() {
@@ -67,15 +82,15 @@ public class User extends DateAudit {
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
-
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
+//
+//
+//    public String getUsername() {
+//        return username;
+//    }
+//
+//    public void setUsername(String username) {
+//        this.username = username;
+//    }
 
     public String getEmail() {
         return email;
@@ -123,5 +138,29 @@ public class User extends DateAudit {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public Set<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
+    }
+
+    public Set<StudentAssignment> getStudentAssignment() {
+        return studentAssignment;
+    }
+
+    public void setStudentAssignment(Set<StudentAssignment> studentAssignment) {
+        this.studentAssignment = studentAssignment;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }
