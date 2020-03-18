@@ -1,7 +1,9 @@
 package com.codeWithMerald.RoyalSealLearningSystem.repositories.course;
 
 import com.codeWithMerald.RoyalSealLearningSystem.models.course.Course;
+import com.codeWithMerald.RoyalSealLearningSystem.models.user.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
