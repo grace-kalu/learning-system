@@ -17,5 +17,6 @@ public interface CourseService {
     Course getCourse(Long courseId);
     Course createCourse(Course course);
     ApiResponse deleteCourse(Long courseId);
+    Course mapCoursesToDepartment(Long departmentId, Long courseId);
 }
 

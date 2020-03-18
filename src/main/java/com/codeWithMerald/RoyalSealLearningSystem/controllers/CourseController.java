@@ -6,6 +6,7 @@ import com.codeWithMerald.RoyalSealLearningSystem.models.teacher.Teacher;
 import com.codeWithMerald.RoyalSealLearningSystem.models.test.Quiz;
 import com.codeWithMerald.RoyalSealLearningSystem.models.user.Student;
 import com.codeWithMerald.RoyalSealLearningSystem.payload.CourseDTO;
+import com.codeWithMerald.RoyalSealLearningSystem.payload.DepartmentEnrollment;
 import com.codeWithMerald.RoyalSealLearningSystem.responses.ApiResponse;
 import com.codeWithMerald.RoyalSealLearningSystem.services.course.CourseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,6 +94,14 @@ public class CourseController {
     @ResponseBody()
     public ResponseEntity<List<Department>> getCourseDepartments(@PathVariable("courseId") Long courseId){
         List<Department> response = courseService.getDepartmentsForCourse(courseId);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PatchMapping("/course/map")
+    @ResponseBody()
+    public ResponseEntity<Course>mapCoursesToDepartment(@Valid @RequestBody DepartmentEnrollment enrollment){
+        Course response = courseService.mapCoursesToDepartment(enrollment.getDepartmentId(), enrollment.getCourseId());
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

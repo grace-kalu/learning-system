@@ -7,6 +7,7 @@ import com.codeWithMerald.RoyalSealLearningSystem.models.test.Quiz;
 import com.codeWithMerald.RoyalSealLearningSystem.models.user.Student;
 import com.codeWithMerald.RoyalSealLearningSystem.payload.CourseDTO;
 import com.codeWithMerald.RoyalSealLearningSystem.repositories.course.CourseRepository;
+import com.codeWithMerald.RoyalSealLearningSystem.repositories.department.DepartmentRepository;
 import com.codeWithMerald.RoyalSealLearningSystem.repositories.test.QuizRepository;
 import com.codeWithMerald.RoyalSealLearningSystem.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,13 @@ import java.util.List;
 public class CourseServiceImpl implements CourseService, PeopleService {
     private final CourseRepository courseRepository;
     private final QuizRepository quizRepository;
+    private final DepartmentRepository departmentRepository;
 
     @Autowired
-    public CourseServiceImpl(CourseRepository courseRepository, QuizRepository quizRepository) {
+    public CourseServiceImpl(CourseRepository courseRepository, QuizRepository quizRepository, DepartmentRepository departmentRepository) {
         this.courseRepository = courseRepository;
         this.quizRepository = quizRepository;
+        this.departmentRepository = departmentRepository;
     }
 
     @Override
@@ -79,10 +82,23 @@ public class CourseServiceImpl implements CourseService, PeopleService {
         assert course != null;
         return courseRepository.getTeachersForCourse(courseId);
     }
+
     @Override
     public List<Department> getDepartmentsForCourse(Long courseId) {
         Course course = courseRepository.findById(courseId).orElse(null);
         assert course != null;
         return courseRepository.getDepartmentsForCourse(courseId);
+    }
+
+    @Override
+    public Course mapCoursesToDepartment(Long departmentId, Long courseId){
+
+        Department department = departmentRepository.findById(departmentId).orElse(null);
+        Course course = courseRepository.findById(courseId).orElse(null);
+        if(course != null && department !=null){
+            course.setDepartment(department);
+            return courseRepository.save(course);
+        }
+      return null;
     }
 }
