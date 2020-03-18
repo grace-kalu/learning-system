@@ -60,8 +60,8 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public void deleteStudent(Long studentId) {
+    public ApiResponse deleteStudent(Long studentId) {
         studentRepository.findById(studentId).ifPresent(studentRepository::delete);
-
+        return new ApiResponse(Boolean.TRUE, "You successfully deleted profile of the student with this id: " + studentId);
     }
 }
