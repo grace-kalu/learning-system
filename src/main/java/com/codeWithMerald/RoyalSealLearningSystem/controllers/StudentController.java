@@ -1,10 +1,12 @@
 package com.codeWithMerald.RoyalSealLearningSystem.controllers;
 
+import com.codeWithMerald.RoyalSealLearningSystem.models.course.Course;
 import com.codeWithMerald.RoyalSealLearningSystem.models.user.Student;
-import com.codeWithMerald.RoyalSealLearningSystem.payload.Enrollment;
+import com.codeWithMerald.RoyalSealLearningSystem.payload.enroll.DepartmentEnrollment;
+import com.codeWithMerald.RoyalSealLearningSystem.payload.enroll.StudentCourseEnrollment;
 import com.codeWithMerald.RoyalSealLearningSystem.payload.StudentRequest;
+import com.codeWithMerald.RoyalSealLearningSystem.payload.enroll.StudentDepartmentEnrollment;
 import com.codeWithMerald.RoyalSealLearningSystem.responses.ApiResponse;
-import com.codeWithMerald.RoyalSealLearningSystem.services.student.StudentService;
 import com.codeWithMerald.RoyalSealLearningSystem.services.student.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -60,8 +62,8 @@ public class StudentController {
 
     @PostMapping("/enroll")
     @ResponseBody
-    public ResponseEntity<ApiResponse> enrollStudent(@RequestBody Enrollment enrollment){
-        ApiResponse apiResponse =  studentService.enrollStudent(enrollment);
+    public ResponseEntity<ApiResponse> enrollStudent(@RequestBody StudentCourseEnrollment studentCourseEnrollment){
+        ApiResponse apiResponse =  studentService.enrollStudent(studentCourseEnrollment);
 
         return new ResponseEntity<>(apiResponse, HttpStatus.CREATED);
     }
@@ -73,5 +75,12 @@ public class StudentController {
         ApiResponse apiResponse =  studentService.unEnroll(studentId, courseId);
 
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
+    @PatchMapping("/map")
+    @ResponseBody()
+    public ResponseEntity<Student>mapCoursesToDepartment(@Valid @RequestBody StudentDepartmentEnrollment enrollment){
+        Student response = studentService.mapStudentToCourse(enrollment.getDepartmentId(), enrollment.getStudentId());
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

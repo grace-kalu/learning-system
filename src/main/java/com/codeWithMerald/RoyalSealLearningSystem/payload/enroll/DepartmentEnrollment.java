@@ -1,4 +1,4 @@
-package com.codeWithMerald.RoyalSealLearningSystem.payload;
+package com.codeWithMerald.RoyalSealLearningSystem.payload.enroll;
 
 public class DepartmentEnrollment {
     private Long departmentId;

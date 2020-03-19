@@ -6,13 +6,11 @@ import com.codeWithMerald.RoyalSealLearningSystem.models.teacher.Teacher;
 import com.codeWithMerald.RoyalSealLearningSystem.models.test.Quiz;
 import com.codeWithMerald.RoyalSealLearningSystem.models.user.Student;
 import com.codeWithMerald.RoyalSealLearningSystem.payload.CourseDTO;
-import com.codeWithMerald.RoyalSealLearningSystem.payload.DepartmentEnrollment;
+import com.codeWithMerald.RoyalSealLearningSystem.payload.enroll.DepartmentEnrollment;
 import com.codeWithMerald.RoyalSealLearningSystem.responses.ApiResponse;
 import com.codeWithMerald.RoyalSealLearningSystem.services.course.CourseServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -98,7 +96,7 @@ public class CourseController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PatchMapping("/enroll")
+    @PatchMapping("/map")
     @ResponseBody()
     public ResponseEntity<Course>mapCoursesToDepartment(@Valid @RequestBody DepartmentEnrollment enrollment){
         Course response = courseService.mapCoursesToDepartment(enrollment.getDepartmentId(), enrollment.getCourseId());

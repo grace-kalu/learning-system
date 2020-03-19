@@ -1,12 +1,13 @@
 package com.codeWithMerald.RoyalSealLearningSystem.services.student;
 
-import com.codeWithMerald.RoyalSealLearningSystem.exception.AppException;
 import com.codeWithMerald.RoyalSealLearningSystem.models.course.Course;
+import com.codeWithMerald.RoyalSealLearningSystem.models.department.Department;
 import com.codeWithMerald.RoyalSealLearningSystem.models.user.Student;
-import com.codeWithMerald.RoyalSealLearningSystem.payload.Enrollment;
+import com.codeWithMerald.RoyalSealLearningSystem.payload.enroll.StudentCourseEnrollment;
 import com.codeWithMerald.RoyalSealLearningSystem.payload.StudentRequest;
 import com.codeWithMerald.RoyalSealLearningSystem.repositories.StudentRepository;
 import com.codeWithMerald.RoyalSealLearningSystem.repositories.course.CourseRepository;
+import com.codeWithMerald.RoyalSealLearningSystem.repositories.department.DepartmentRepository;
 import com.codeWithMerald.RoyalSealLearningSystem.repositories.student.StudentAssignmentRepository;
 import com.codeWithMerald.RoyalSealLearningSystem.repositories.test.QuizScoreRepository;
 import com.codeWithMerald.RoyalSealLearningSystem.responses.ApiResponse;
@@ -25,13 +26,15 @@ public class StudentServiceImpl implements StudentService, EnrollStudent{
     private final QuizScoreRepository quizScoreRepository;
 
     private final StudentAssignmentRepository studentAssignmentRepository;
+    private final DepartmentRepository departmentRepository;
 
     @Autowired
-    public StudentServiceImpl(StudentRepository studentRepository, CourseRepository courseRepository, QuizScoreRepository quizScoreRepository, StudentAssignmentRepository studentAssignmentRepository) {
+    public StudentServiceImpl(StudentRepository studentRepository, CourseRepository courseRepository, QuizScoreRepository quizScoreRepository, StudentAssignmentRepository studentAssignmentRepository, DepartmentRepository departmentRepository) {
         this.studentRepository = studentRepository;
         this.courseRepository = courseRepository;
         this.quizScoreRepository = quizScoreRepository;
         this.studentAssignmentRepository = studentAssignmentRepository;
+        this.departmentRepository = departmentRepository;
     }
 
     @Override
@@ -67,9 +70,9 @@ public class StudentServiceImpl implements StudentService, EnrollStudent{
     }
 
     @Override
-    public ApiResponse enrollStudent(Enrollment enrollment) {
-        Student student = studentRepository.findById(enrollment.getStudentId()).orElse(null);
-        Course course = courseRepository.findById(enrollment.getCourseId()).orElse(null);
+    public ApiResponse enrollStudent(StudentCourseEnrollment studentCourseEnrollment) {
+        Student student = studentRepository.findById(studentCourseEnrollment.getStudentId()).orElse(null);
+        Course course = courseRepository.findById(studentCourseEnrollment.getCourseId()).orElse(null);
         if(course != null){
             course.getStudents().add(student);
             courseRepository.save(course);
@@ -88,5 +91,15 @@ public class StudentServiceImpl implements StudentService, EnrollStudent{
         }
 
         return new ApiResponse(Boolean.TRUE, "You are currently not enrolled for this course " + course);
+    }
+
+    @Override
+    public Student mapStudentToCourse(Long departmentId, Long studentId) {
+        Department department = departmentRepository.findById(departmentId).orElse(null);
+        Student student = studentRepository.findById(studentId).orElse(null);
+
+        assert student != null;
+        student.setDepartment(department);
+        return studentRepository.save(student);
     }
 }

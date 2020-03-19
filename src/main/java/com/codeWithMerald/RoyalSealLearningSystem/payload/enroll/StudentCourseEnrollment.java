@@ -1,6 +1,6 @@
-package com.codeWithMerald.RoyalSealLearningSystem.payload;
+package com.codeWithMerald.RoyalSealLearningSystem.payload.enroll;
 
-public class Enrollment {
+public class StudentCourseEnrollment {
     private Long courseId;
     private Long studentId;
 
