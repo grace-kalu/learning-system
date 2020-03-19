@@ -28,7 +28,6 @@ public class StudentController {
     }
 
     @GetMapping()
-    @PreAuthorize("hasRole('STUDENT')")
     public ResponseEntity<List<Student>> getAllStudents() {
         List<Student> response = studentService.getAllStudents();
 
@@ -36,7 +35,6 @@ public class StudentController {
     }
 
     @GetMapping(path = "/{studentId}")
-    @PreAuthorize("hasRole('STUDENT')")
     public ResponseEntity<Student> getStudent(@PathVariable(value = "studentId") Long studentId) {
         Student response = studentService.getStudent(studentId);
 
@@ -44,7 +42,6 @@ public class StudentController {
     }
 
     @PutMapping("/{studentId}")
-    @PreAuthorize("hasRole('STUDENT')")
     public ResponseEntity<Student> updateStudent(@PathVariable(value = "studentId") Long studentId,
                                            @Valid @RequestBody StudentRequest newStudent) {
         Student updatedStudent = studentService.updateStudent(studentId, newStudent);
@@ -53,7 +50,6 @@ public class StudentController {
     }
 
     @DeleteMapping("/{studentId}")
-    @PreAuthorize("hasRole('STUDENT')")
     public ResponseEntity<ApiResponse> deleteStudent(@PathVariable(value = "studentId") Long studentId) {
         ApiResponse response = studentService.deleteStudent(studentId);
 
@@ -78,7 +74,7 @@ public class StudentController {
     }
     @PatchMapping("/map")
     @ResponseBody()
-    public ResponseEntity<Student>mapCoursesToDepartment(@Valid @RequestBody StudentDepartmentEnrollment enrollment){
+    public ResponseEntity<Student>mapStudentToDepartment(@Valid @RequestBody StudentDepartmentEnrollment enrollment){
         Student response = studentService.mapStudentToCourse(enrollment.getDepartmentId(), enrollment.getStudentId());
 
         return new ResponseEntity<>(response, HttpStatus.OK);
